@@ -4,7 +4,7 @@ from aiogram import BaseMiddleware
 from aiogram.types import TelegramObject, Message
 from sqlalchemy.ext.asyncio import async_sessionmaker, AsyncSession
 
-from tg2vk.database.ops import get_or_add_user
+from tg2vk.database import ops
 
 
 class DataBaseSession(BaseMiddleware):
@@ -25,5 +25,5 @@ class DataBaseSession(BaseMiddleware):
 class UserMiddleware(BaseMiddleware):
     async def __call__(self, handler: Callable[[Message, Dict[str, Any]], Awaitable[Any]],
                        event: Message, data: Dict[str, Any]) -> Any:
-        data['from_user'] = await get_or_add_user(data['session'], event.from_user)
+        data['from_user'] = await data['session'].get_or_add_user(event.from_user)
         return await handler(event, data)

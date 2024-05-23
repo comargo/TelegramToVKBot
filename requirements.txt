@@ -1,5 +1,7 @@
-aiogram~=3.5
+aiogram~=3.6
 python-dotenv~=1.0.1
 SQLAlchemy~=2.0
 aiosqlite~=0.20
 alembic~=1.13
+
+aiohttp~=3.9
